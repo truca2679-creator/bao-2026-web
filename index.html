@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="vi">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BAO</title>
+
+    <style>
+        /* =========================================
+           PHẦN CSS CHO FAQ (NGÀY 12)
+           ========================================= */
+        .faq-container {
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+            text-align: left;
+        }
+
+        details {
+            background-color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        details:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        summary {
+            font-weight: bold;
+            color: #d86d9c;
+            font-size: 18px;
+            outline: none;
+        }
+
+        details p {
+            color: #444; 
+            font-size: 16px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed #efcfe3; 
+        }
+
+        /* =========================================
+           PHẦN CSS CHO LỊCH (NGÀY 13)
+           ========================================= */
+        .calendar-container {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px; 
+        }
+
+        .calendar-container iframe {
+            max-width: 100%; 
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            background-color: white; 
+        }
+        
+        iframe {
+            max-width: 100%;
+            border-radius: 12px; 
+        }
+        
+        body {
+            background-color: #efcfe3; 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            margin: 0; 
+        }
+
+        h1 { color: #eb9ab2; }
+        p { color: #d86d9c; font-size: 20px; }
+
+        @keyframes nhip-tim {
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.05); } 
+            100% { transform: scale(1); } 
+        }
+
+        a {
+            background-color: #e27396; 
+            color: white; 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            display: inline-block; 
+            font-weight: bold; 
+            transition: 0.3s; 
+            animation: nhip-tim 1.5s infinite; 
+        }
+
+        a:hover { background-color: #ecf2d8; }
+        
+        .container {
+            display: flex; 
+            gap: 20px; 
+            margin-top: 30px; 
+            padding: 20px;
+            background-color: white; 
+            border-radius: 10px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .column {
+            flex: 1; 
+            background-color: #e9ecef; 
+            padding: 15px;
+            border-radius: 8px;
+            text-align: left; 
+        }
+        
+        .navbar {
+            background-color: #ffdbda; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px 40px; 
+            margin-bottom: 30px; 
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            color: #db7f8e; 
+            background-color: transparent; 
+            margin-top: 0;
+            padding: 0;
+            animation: none; 
+        }
+
+        .nav-links a {
+            background-color: transparent; 
+            color: white; 
+            font-weight: normal; 
+            font-size: 16px;
+            margin-top: 0;
+            margin-left: 20px; 
+            padding: 8px 12px;
+            border-radius: 4px;
+            animation: none; 
+        }
+
+        .nav-links a:hover {
+            background-color: #d5c5c8; 
+            color: #f3b9cb; 
+        }
+
+        footer {
+            background-color: #db7f8e; 
+            color: white;
+            padding: 20px 0;
+            margin-top: 50px; 
+        }
+        
+        footer p {
+            color: white; 
+            font-size: 16px;
+            margin: 5px 0;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto 40px auto; 
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+        }
+
+        form {
+            display: flex;
+            flex-direction: column; 
+            gap: 15px; 
+        }
+
+        input, textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit; 
+            font-size: 16px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #db7f8e; 
+        }
+
+        form button {
+            background-color: #e27396; 
+            color: white; 
+            border: none; 
+            padding: 12px; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            font-size: 16px;
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+
+        form button:hover {
+            background-color: #db7f8e; 
+        }
+
+        /* =========================================
+           PHẦN CSS CHO ĐỒNG HỒ ĐẾM NGƯỢC (NGÀY 11)
+           ========================================= */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .time-box {
+            background-color: #e27396;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            min-width: 70px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .time-box span {
+            font-size: 36px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .time-box p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #fce4ec; 
+        }
+        
+        /* =========================================
+           PHẦN CSS CHO CORE TEAM (NGÀY 15)
+           ========================================= */
+        .team-container {
+            display: flex;
+            justify-content: center; 
+            flex-wrap: wrap; 
+            gap: 20px;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .team-card {
+            background-color: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            width: 220px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px); 
+            box-shadow: 0 8px 20px rgba(219,127,142,0.3); 
+        }
+
+        .team-card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 4px solid #efcfe3; 
+            margin-bottom: 15px;
+        }
+
+        .team-card h4 {
+            margin: 0;
+            color: #d86d9c;
+            font-size: 20px;
+        }
+
+        .team-card p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #777;
+        }
+        
+        /* =========================================
+           PHẦN CSS CHO NÚT LÊN ĐẦU TRANG (NGÀY 14)
+           ========================================= */
+        html {
+            scroll-behavior: smooth; 
+        }
+
+        #back-to-top {
+            position: fixed; 
+            bottom: 30px; 
+            right: 30px; 
+            background-color: #db7f8e; 
+            color: white;
+            width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+            transition: 0.3s;
+            z-index: 1000; 
+        }
+
+        #back-to-top:hover {
+            background-color: #e27396;
+            transform: translateY(-5px); 
+        }
+        
+        /* =========================================
+           PHẦN CSS CHO THƯ VIỆN ẢNH (NGÀY 16)
+           ========================================= */
+        .gallery-container {
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 15px; 
+            max-width: 900px;
+            margin: 0 auto 40px auto;
+            padding: 0 20px;
+        }
+
+        .gallery-container img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; 
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: 0.3s; 
+            cursor: pointer;
+        }
+
+        .gallery-container img:hover {
+            transform: scale(1.05); 
+            box-shadow: 0 8px 16px rgba(219,127,142,0.4); 
+            z-index: 10;
+        }
+        
+        @media (max-width: 768px) {
+            .container { flex-direction: column; padding: 10px; }
+            h1 { font-size: 24px; }
+            .countdown-container { gap: 10px; flex-wrap: wrap; }
+            .time-box { min-width: 60px; padding: 10px; }
+            .time-box span { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">BÃO</a>
+        <div class="nav-links">
+            <a href="#">Trang chủ</a>
+            <a href="#">Giới thiệu</a>
+            <a href="#">Liên hệ</a>
+        </div>
+    </nav>
+
+    <h1>BÃO 2026</h1>
+    <p>BÃO là hội chợ hướng nghiệp miễn phí của học sinh THPT tổ chức cho học sinh THPT</p>
+    
+    <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/699310430_1442149437953614_6996612354525705987_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeEJiIwuKvqfIEzXZEgzwlhcyO5dep7pJ2vI7l16nuknaxPsD83MhyWtQw7MoYcP3K8lWIbxNyLWT-cj_ET7iYiT&_nc_ohc=LIYRujYd1G8Q7kNvwGsIQ0v&_nc_oc=Adpfj4WFjhmjq8weyRTDt__XM-SiF_QEu1rErzjt52rFzq68RYonkGv8_ihf2GPSq-WAxB6qe7Czd5HAukViDeUU&_nc_zt=23&_nc_ht=scontent.fhan2-4.fna&_nc_gid=TC0RbPAxRGN3i2BYqbaykg&_nc_ss=7b2a8&oh=00_Af419p9gQQ75N5vsPY0NvnHrdYC2dfTVUUt0x3HDfW2aLQ&oe=6A1DFC58" alt="Logo BÃO" style="max-width: 100%; border-radius: 10px;">
+    <br><br>
+    
+    <a href="https://www.facebook.com/ngaydonbao" target="_blank">Bấm vào đây để vào BÃO</a>
+
+    <hr style="margin-top: 40px; border: 1px solid #ddd;"> 
+    
+    <h2>UNLOCK THE REAL</h2>
+
+    <div class="container">
+        <div class="column">
+            <h3>MÙA BÃO THỨ 14</h3>
+            <p>#BAO2026 #SHINEBEYONDFANTASY</p>
+        </div>
+        <div class="column">
+            <h3>US</h3>
+            <p>Email: bao.baofair2026@gmail.com</p>
+        </div>
+    </div> 
+    
+    <hr style="margin-top: 40px; border: 1px solid #ddd;">
+    <h2>KHOẢNH KHẮC MÙA BÃO</h2>
+    <p>Nhìn lại những hình ảnh đáng nhớ từ các mùa trước</p>
+
+    <div class="gallery-container" data-aos="fade-up">
+        <img src="https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-6/535016016_1212251724276721_104659035575759554_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEx861QlqWLtSLcWP50LEpAYufvUXUwGtZi5-9RdTAa1sEpNMJEHPvHQzuNrIeFIZWILY_sZNdXrTIwKX_gO032&_nc_ohc=K4VFaDXSYiEQ7kNvwHQTuqR&_nc_oc=Adr30kdr4oGlkno9-ptNo8PDES3HCLp5K7DNoyPWrPQ4tOCydDVDuGm47VudxEEJvCJiGJjOMTCAOrgianRHIaEi&_nc_zt=23&_nc_ht=scontent.fhan20-1.fna&_nc_gid=syYBl0w4xHqdxLYIaMmz6w&_nc_ss=7b2a8&oh=00_Af7eEyJS0VIjh3vL8irCmbA4nPI8WVZjbOXC_bYSVZa3Rw&oe=6A20EFF5" alt="BÃO Event 1">
+        <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/536269261_1212249564276937_6954109239105064442_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHNw9gzLxLzEZEuIINcVvy09vYKbnLcDwf29gpuctwPB-W9zKaKEhZCKg34mfgtxJ6F653udBN8YwBu9H9dvedx&_nc_ohc=Zgywpm7xzT0Q7kNvwF37-75&_nc_oc=AdoM7mQXBTDUSb2vXzDMIC9Gekl2E_pf4zzHUzw6Jar-3N3IiIUwH8Hxkqdr1p8ybeemMH9B5ZwmRkX-YEWN5q19&_nc_zt=23&_nc_ht=scontent.fhan2-3.fna&_nc_gid=V7iZJHAhg3tHs6exiEvg4A&_nc_ss=7b2a8&oh=00_Af75uxKRQo_O8yRjETy2p4XooHB7AhrWC6mFBqid4ZmcEw&oe=6A20F9E6" alt="BÃO Event 2">
+        <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/535245352_1212251804276713_3188574785962964275_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGY_PsDfjDr3qrQFU3Y33ZgVKHvwI5d0VJUoe_Ajl3RUvItsd2tecUku9Juo9xUGR_w6CS_2ffC3rNJJ5luPx07&_nc_ohc=xAQIIUUEyWIQ7kNvwFgaNSM&_nc_oc=AdokfoAelWeUFKrPgJDj9o7_uZa-3tD1kMcn-sH6U6v-8IzjyAMc_vZuDTwWvSne3KQ_eGhEj_38wtT0hmBg3_Au&_nc_zt=23&_nc_ht=scontent.fhan2-4.fna&_nc_gid=XUHbgfqSChlvbRl6p_kGhQ&_nc_ss=7b2a8&oh=00_Af4MTTbzpoba6r1IkkQa6-WEl32UFgFsEC5kyQPyAr1xYw&oe=6A20CB2A" alt="BÃO Event 3">
+        <img src="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/535676909_1212252657609961_8993544722573721331_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHrUF13od0FYGkDrMakNF9WKMqSgrtos6koypKCu2izqXwdzL9GZnvQIJqEgn3SxOvTGzbxPgX0MoRY3JXrIE8j&_nc_ohc=uWyyy21L_xkQ7kNvwFc_cz7&_nc_oc=Adrk5C-P6v7rhCnmwV6cV6DvsH8co3CmP8_Bs5onEym9l0iBRYeBjbmE4y-Vns5Lih2Wc5WtCWuV5b_zq715uXDs&_nc_zt=23&_nc_ht=scontent.fhan2-4.fna&_nc_gid=s2LQC2efCvRKNjM5igedzQ&_nc_ss=7b2a8&oh=00_Af5feyxkPhgFS58eDypDvrmP9CDSzg_qqSErRCLK5hRQag&oe=6A20E2AA" alt="BÃO Event 4">
+        <img src="https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-6/535382567_1212251697610057_8566556417730625559_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHLImTB50RAgfacXZRYX8R_JRYaXp6eom0lFhpenp6ibTqUwbrfyG56xAQzTC4bQfKTyM862MVmyy1yNB1FON2z&_nc_ohc=lZ6lqGtDUjQQ7kNvwH-sDdZ&_nc_oc=AdpIQ0tsBvwNa_dabkSmXeAI_jCXRQOV5vITj7TnBou4k09yY_tPx6k_SiY7HCXlMMBs5phdsEV15O6XwEX9eFzZ&_nc_zt=23&_nc_ht=scontent.fhan20-1.fna&_nc_gid=D0CoxM41101YBL-nyCLnhw&_nc_ss=7b2a8&oh=00_Af5JPFomtiWZBo2qiJ2VLX2LUs_-jjDueWqrpB9hYZY8fw&oe=6A20EE4A" alt="BÃO Event 5">
+        <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/535255239_1212251564276737_7806990836909406975_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeGXwApiE_lbmpHzegSrS_8qHxVkm7aACqYfFWSbtoAKpgCn6SnUOC04gWdAvMG_hHzXErNnXUTOEd3FaYcT2-Lg&_nc_ohc=nsLYcrFftsEQ7kNvwHmtF_P&_nc_oc=Ado5mvJMn50FaPBljk1bzMElF5Hh7Z5M8rpcNFeHklkp8Wx6c8GioA0QOZi3aoBT7jsECvRW2sKQjUbxtwGSkZcY&_nc_zt=23&_nc_ht=scontent.fhan2-3.fna&_nc_gid=9KuEgXgX3aVGN3ElEh5icw&_nc_ss=7b2a8&oh=00_Af5Xut6RrbyKz4Sbiyjs0O4oKyEHDLqseKOO14YlCkdU3A&oe=6A20F2CC" alt="BÃO Event 6">
+    </div>
+
+    <hr style="margin-top: 40px; border: 1px solid #ddd;">
+    <h2>BTC BÃO 2026</h2>
+    <p>Những gương mặt đứng sau hành trình phá vỡ giới hạn</p>
+
+   <div class="team-card" data-aos="fade-up">
+        </div>
+
+    <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+        </div>
+
+    <div class="team-card" data-aos="fade-up" data-aos-delay="400">
+        </div>
+        
+        <div class="team-card">
+            <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/587037299_1301686548665727_2544858206417469309_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=f727a1&_nc_eui2=AeEFjGYrSlLfQa3VZvs93-zqiXUfBzF8h8iJdR8HMXyHyJNAhy4lwCRf0J75dVp1wbx6kXZZ9ZHmOssbwHZDaspO&_nc_ohc=ywDKmmXpQfgQ7kNvwEMjrmP&_nc_oc=Adr0Wvj_kfXzXxT4d_gJONPLz7RD368gO5x5yfS8t3ODrBtVwZFaRBiPItfxV-yPUMMiZG_2PYI85IhqSNMTy_DT&_nc_zt=23&_nc_ht=scontent.fhan2-3.fna&_nc_gid=LIn24cR-oxugFXh-2owS0Q&_nc_ss=7b2a8&oh=00_Af5aKR290tEuybHr9VIGWUo--1iSAYO-YCxU3pKARVOi_w&oe=6A20E3D1" alt="Thành viên 1">
+            <h4>Lê Ngọc Quang</h4>
+            <p>Phó Ban Tổ Chức</p>
+        </div>
+
+        <div class="team-card">
+            <img src="https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-6/584451902_1320926726732575_6092389891735173040_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHh5slbBWnNlcOha0jkKNG1DEbqyuL4h8MMRurK4viHw4kHvtiEUdCjNiZTnAL0pO5kiFA5ShJmpxF-NqvQxDa0&_nc_ohc=AAlOy7ceq8wQ7kNvwGwBiuT&_nc_oc=Adrjs-QbcONKmYCj7VrgIWt8qVyHC2rffITiUkPvhrw-oRFRuFQUm3qU3kEfmy_zK7jGmh-6Vbre52MReZ8EECCm&_nc_zt=23&_nc_ht=scontent.fhan20-1.fna&_nc_gid=tuBvHzyJX4Nd1Rtz__lzjg&_nc_ss=7b2a8&oh=00_Af7NETDhBWZ9uDrkWqP7fgySREVe1QbbURKntIhe_WePdw&oe=6A20E04A" alt="Thành viên 2">
+            <h4>Lê Bảo Trang</h4>
+            <p>Trưởng Ban Tổ Chức</p>
+        </div>
+
+        <div class="team-card">
+            <img src="https://scontent.fhan2-3.fna.fbcdn.net/v/t39.30808-6/585543740_1301686251999090_5382363416355792774_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f727a1&_nc_eui2=AeGxO8_hsQzOfP0Vn7HEgNrSXwght8ZKhBNfCCG3xkqEE7jufnCd7f3RuZw6Htj9O5tN2wX36EH2T2ClWyc7bwKl&_nc_ohc=UjeQfI7XQkgQ7kNvwF55MlP&_nc_oc=AdqpABCHNpW8H0AweYH1bHzkIpnEKJsMTkVh_U_FUptMDlI4RVs3E4j6rCt4CQgIbauqQZ56Ureetpb7ckp0XegV&_nc_zt=23&_nc_ht=scontent.fhan2-3.fna&_nc_gid=r895GMqQvHwgr4urcmaHnw&_nc_ss=7b2a8&oh=00_Af5aazuyAIeq5tEtG76N3goL_LQvN6ajx4fVBnJ7u0xlPA&oe=6A20D672" alt="Thành viên 3">
+            <h4>Mai Bảo Ngọc</h4>
+            <p>Trưởng Ban Nội Dung</p>
+        </div>
+
+    </div>
+
+    <hr style="margin-top: 40px; border: 1px solid #ddd;">
+    <h2>COUNTDOWN TO BÃO</h2>
+    <p style="font-style: italic; color: #db7f8e;">Step Into Reality - Shine Beyond The Fantasy</p>
+
+    <div class="countdown-container">
+        <div class="time-box">
+            <span id="days">00</span>
+            <p>Ngày</p>
+        </div>
+        <div class="time-box">
+            <span id="hours">00</span>
+            <p>Giờ</p>
+        </div>
+        <div class="time-box">
+            <span id="minutes">00</span>
+            <p>Phút</p>
+        </div>
+        <div class="time-box">
+            <span id="seconds">00</span>
+            <p>Giây</p>
+        </div>
+    </div>
+    
+    <hr style="margin-top: 40px; border: 1px solid #ddd;">
+    <h2>HỎI ĐÁP TUYỂN THÀNH VIÊN (FAQ)</h2>
+    <p>Những thắc mắc thường gặp về đợt tuyển thành viên và vòng phỏng vấn sắp tới:</p>
+
+    <div class="faq-container">
+        
+        <details>
+            <summary>Vòng phỏng vấn sẽ hỏi những câu hỏi như thế nào?</summary>
+            <p>Các câu hỏi phỏng vấn chủ yếu xoay quanh kỹ năng xử lý tình huống, mức độ hiểu biết về dự án BÃO và định hướng của bạn. Cứ tự tin thể hiện cá tính thật nhé!</p>
+        </details>
+
+        <details>
+            <summary>Dự án có yêu cầu kinh nghiệm trước đây không?</summary>
+            <p>Hoàn toàn không! BÃO mở cửa cho tất cả học sinh THPT có đam mê. Sự nhiệt huyết và tinh thần học hỏi mới là điều quan trọng nhất.</p>
+        </details>
+
+        <details>
+            <summary>Hoạt động của dự án có bị trùng với lịch học trên trường không?</summary>
+            <p>Ban điều hành sẽ luôn sắp xếp lịch hoạt động và deadline linh hoạt nhất để đảm bảo không ảnh hưởng đến việc học trên lớp của các thành viên.</p>
+        </details>
+
+    </div>
+    
+    <hr style="margin-top: 40px; border: 1px solid #ddd;">
+    <h2>LỊCH TRÌNH BÃO 2026</h2>
+    <p>Theo dõi các cột mốc sự kiện quan trọng để không bỏ lỡ nhé!</p>
+
+    <div class="calendar-container">
+        
+        <iframe src="https://calendar.google.com/calendar/embed?src=truca2679%40gmail.com&ctz=Asia%2FHo_Chi_Minh" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        
+    </div>
+    
+    <hr style="margin-top: 40px; border: 1px solid #ddd;">
+    <h2>ĐĂNG KÝ NHẬN THÔNG TIN</h2>
+    <p>Để lại thông tin để không bỏ lỡ các thông báo mới nhất nhé!</p>
+
+   <div class="form-container" data-aos="zoom-in">
+        <form id="form-dang-ky">
+            <input type="text" id="ten-nguoi-dung" placeholder="Tên của bạn" required>
+            <input type="email" placeholder="Email của bạn (VD: bao.baofair2026@gmail.com)" required>
+            <textarea placeholder="Bạn có câu hỏi gì cho ban tổ chức không?" rows="4"></textarea>
+            <button type="submit">Gửi Thông Tin</button>
+        </form>
+    </div>
+
+    <hr style="margin-top: 40px; border: 1px solid #ddd;">
+
+    <h2>Góc Thư Giãn</h2>
+    <p>Một chút âm nhạc và phim ảnh để giải trí:</p>
+
+    <div style="text-align: center; margin-bottom: 50px;">
+        <iframe width="560" height="315" 
+            src="https://www.youtube.com/embed/CjxHel6Xvvg?si=12tZyoTpklkNqP2G"
+            title="Little Prince"
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <footer>
+        <p>© 2026 Dự án BÃO. Đã giữ bản quyền.</p>
+        <p><i>#BAO2026 #SHINEBEYONDFANTASY</i></p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        // Cài đặt ngày diễn ra sự kiện (Đang ví dụ là 15/08/2026)
+        const countDownDate = new Date("Aug 15, 2026 08:00:00").getTime();
+
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.querySelector(".countdown-container").innerHTML = "<h2 style='color:#e27396;'>SỰ KIỆN ĐÃ BẮT ĐẦU!</h2>";
+            }
+        }, 1000);
+
+        const formDangKy = document.getElementById('form-dang-ky');
+
+        formDangKy.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            const ten = document.getElementById('ten-nguoi-dung').value;
+            
+            alert("Tuyệt vời " + ten + "! Cảm ơn bạn đã quan tâm và để lại thông tin cho BÃO 2026.");
+            
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.6 }
+            });
+
+            formDangKy.reset(); 
+        });
+    </script>
+    <a href="#" id="back-to-top" title="Lên đầu trang">🗝️</a>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        AOS.init({
+            duration: 1000, /* Thời gian chạy hiệu ứng: 1000 mili-giây (1 giây) */
+            once: true /* Hiệu ứng chỉ chạy 1 lần khi cuộn tới, không bị lặp lại gây rối mắt */
+        });
+    </script>
+</body> 
+</html>
